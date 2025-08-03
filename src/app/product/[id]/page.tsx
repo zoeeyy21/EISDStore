@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Metadata } from "next";
 
 type Product = {
   id: number;
@@ -7,6 +8,12 @@ type Product = {
   price: number;
   image: string;
 };
+
+interface ProductPageProps {
+  params: {
+    id: string;
+  };
+}
 
 export async function generateStaticParams() {
   const res = await fetch("https://fakestoreapi.com/products");
@@ -22,7 +29,16 @@ async function getProduct(id: string): Promise<Product> {
   return res.json();
 }
 
-export default async function ProductDetail({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const product = await getProduct(params.id);
+
+  return {
+    title: `${product.title} - FakeStore`,
+    description: product.description,
+  };
+}
+
+export default async function ProductDetail({ params }: ProductPageProps) {
   const product = await getProduct(params.id);
 
   return (
