@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --color-muted: #6b7280;
+  --font-sans: 'Inter', 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Fira Code', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --color-muted: #9ca3af;
+  }
+}
+
+/* Global app styles */
+.app-body {
+  background-color: #ffffff;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #6b7280;
+  color: white;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navbar-container {
+  max-width: 96rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.nav-links a {
+  margin-left: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: text-decoration 0.2s;
+}
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Main content */
+.main-content {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  min-height: calc(100vh - 128px);
+}
+
+/* Footer */
+.footer {
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--color-muted);
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Selection highlight */
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-muted);
+  border-radius: 4px;
+}

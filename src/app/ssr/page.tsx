@@ -7,10 +7,11 @@ type Product = {
   image: string;
 };
 
+export const dynamic = "force-dynamic"; // untuk SSR
+
 async function getProducts(): Promise<Product[]> {
   const res = await fetch("https://fakestoreapi.com/products", {
-    // Ini agar benar-benar static di-build time (SSG)
-    cache: "force-cache", // default value
+    cache: "no-store", // SSR = fetch tiap request
   });
 
   if (!res.ok) throw new Error("Failed to fetch");
@@ -18,12 +19,12 @@ async function getProducts(): Promise<Product[]> {
   return res.json();
 }
 
-export default async function HomePage() {
+export default async function SSRPage() {
   const products = await getProducts();
 
   return (
     <section>
-      <h1 className="text-2xl font-bold mb-4">Home Page (SSG)</h1>
+      <h1 className="text-2xl font-bold mb-4">Server-Side Rendering (SSR)</h1>
       <ProductList products={products} />
     </section>
   );
